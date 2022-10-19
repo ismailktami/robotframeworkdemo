@@ -23,4 +23,4 @@ jobs:
       run: docker build . --file Dockerfile --tag ismailktamirobot/rbfdemocuisine:$(date +%s)
       
     - name: Docker Push
-      run: docker push ismailktamirobot/rbfdemocuisine
+      run: docker push ismailktamirobot/rbfdemocuisine:$(date +%s)
