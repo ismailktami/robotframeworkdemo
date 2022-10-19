@@ -1,23 +1,33 @@
 name: Docker Image CI
+
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:
+    inputs:
+      Browser:
+        description: 'Browser'
+        default: 'Chrome'
+        required: true
+      Environnement:
+        description: 'Environnement'
+        default: 'Preprod'
+        required: true
+      PublishReport:
+        description: 'PublishReport'
+        default: true
+        required: true
 jobs:
 
   test:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
-    - name: Build the Docker image
-      run:  docker build . --file Dockerfile --tag ismailktamirobot/rbfdemocuisine:$(date +%s)
-
-    - name: Docker Push
-      run: docker push ismailktamirobot/rbfdemocuisine
+    container:
+      image: ismailktamirobot/rbfdemocuisine:v1
+      volumes:
+        - my_docker_volume:/volume_mount
+      steps:
+      - uses: actions/checkout@v2
+      - run: ls
+      - run: robot .
