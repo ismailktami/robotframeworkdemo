@@ -1,5 +1,4 @@
 name: Docker Image CI
-
 on:
   push:
     branches: [ "master" ]
@@ -18,7 +17,7 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     - name: Build the Docker image
-      run: |
-        ls
-        docker build . --file Dockerfile --tag ismailktamirobot/rbfdemocuisine:$(date +%s)
-        ls
+      run:  docker build . --file Dockerfile --tag ismailktamirobot/rbfdemocuisine:$(date +%s)
+
+    - name: Docker Push
+      run: docker push ismailktamirobot/rbfdemocuisine
