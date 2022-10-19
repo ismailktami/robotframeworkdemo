@@ -19,4 +19,4 @@ COPY . /app
 WORKDIR /app
 
 RUN  pip3 install -r requirements.txt
-
+RUN  python -m  robot tests.robot
