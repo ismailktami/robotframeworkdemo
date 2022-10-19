@@ -22,4 +22,12 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag ismailktamirobot/rbfdemocuisine:$(date +%s)
-        python -m  robot  tests.robot
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: reports
+        path: |
+        app
+        app/reports
