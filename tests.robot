@@ -1,5 +1,4 @@
 *** Settings ***
-Library     Browser
 Library     SeleniumLibrary
 Library     BuiltIn
 
