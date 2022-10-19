@@ -25,4 +25,4 @@ Test
    SeleniumLibrary.Click Element   ${accept_cookies_btn}
    SeleniumLibrary.Wait Until Element Is Visible    ${close_popup_btn}    30s
    Sleep    2s
-   SeleniumLibrary.Click Element   ${close_popup_btn}
+   SeleniumLibrary.Click Element   ${close_popup_btn} 
