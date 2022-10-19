@@ -7,10 +7,8 @@ on:
     branches: [ "master" ]
 jobs:
 
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: docker login
@@ -21,13 +19,6 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     - name: Build the Docker image
       run: |
+        ls
         docker build . --file Dockerfile --tag ismailktamirobot/rbfdemocuisine:$(date +%s)
-
-    - name: Upload test results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: reports
-        path: |
-        app
-        app/reports
+        ls
