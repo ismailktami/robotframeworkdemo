@@ -20,7 +20,6 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ismailktamirobot/rbfdemocuisine:$(date +%s)
-      
-    - name: Execution tests
-      run: python -m robot tests.robot
+      run: |
+        docker build . --file Dockerfile --tag ismailktamirobot/rbfdemocuisine:$(date +%s)
+        python -m  robot  tests.robot

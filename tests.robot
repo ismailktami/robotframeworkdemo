@@ -23,8 +23,12 @@ Open Chrome
     # SET CHROME OPTIONS
     ${options}=    BuiltIn.Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
     Call Method    ${options}    add_argument    --test-type
-    Call Method    ${options}    add_argument    --disable-extensions
     Call Method    ${options}    add_argument    --ignore-certificate-errors
+    Call Method    ${options}    add_argument    --disable-extensions
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    --disable-gpu
+    Call Method    ${options}    add_argument    --no-sandbox
     # AUTOMATICALY DEFAULT DOWNLOAD DIRECTORY
 	${prefs}    Create Dictionary    download.default_directory=${OUTPUT DIR}    profile.default_content_settings.popups=${0}    profile.default_content_setting_values.notifications=${2}
 	Call Method    ${options}    add_experimental_option    prefs    ${prefs}  
