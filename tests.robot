@@ -3,6 +3,7 @@ Library     SeleniumLibrary
 Library     BuiltIn
 Library     String
 Force Tags    TESTPLAN-30    SUITE-32
+
 *** Variables ***
 ${url_ixina}      https://www.ixina.fr/
 ${accept_cookies_btn}   //*[@id='onetrust-accept-btn-handler']
@@ -51,63 +52,28 @@ Test1
    Go to    url=${url_ixina}
    SeleniumLibrary.Maximize Browser Window
    SeleniumLibrary.Wait Until Element Is Visible    ${accept_cookies_btn}    30s
-   SeleniumLibrary.Click Element   ${accept_cookies_btn}
-   SeleniumLibrary.Wait Until Element Is Visible    ${close_popup_btn}    30s
-   Sleep    2s
-   SeleniumLibrary.Click Element   ${close_popup_btn} 
-
-
 
 Test2
    [Tags]  ID-33
    Open Chrome
    Go to    url=${url_ixina}
-   SeleniumLibrary.Maximize Browser Window
-   SeleniumLibrary.Wait Until Element Is Visible    ${accept_cookies_btn}    30s
-   SeleniumLibrary.Click Element   ${accept_cookies_btn}
-   SeleniumLibrary.Wait Until Element Is Visible    ${close_popup_btn}    30s
-   Sleep    2s
-   SeleniumLibrary.Click Element   ${close_popup_btn} 
 
 Test3
    [Tags]  ID-34
    Open Chrome
    Go to    url=${url_ixina}
-   SeleniumLibrary.Maximize Browser Window
-   SeleniumLibrary.Wait Until Element Is Visible    ${accept_cookies_btn}    30s
-   SeleniumLibrary.Click Element   ${accept_cookies_btn}
-   SeleniumLibrary.Wait Until Element Is Visible    ${close_popup_btn}    30s
-   Sleep    2s
-   SeleniumLibrary.Click Element   ${close_popup_btn} 
 
 Test4
    [Tags]  ID-35
    Open Chrome
    Go to    url=${url_ixina}
-   SeleniumLibrary.Maximize Browser Window
-   SeleniumLibrary.Wait Until Element Is Visible    ${accept_cookies_btn}    30s
-   SeleniumLibrary.Click Element   ${accept_cookies_btn}
-   SeleniumLibrary.Wait Until Element Is Visible    ${close_popup_btn}    30s
-   Sleep    2s
-   SeleniumLibrary.Click Element   ${close_popup_btn} 
 
 Test5
    [Tags]  ID-36
    Open Chrome
    Go to    url=${url_ixina}
-   SeleniumLibrary.Maximize Browser Window
-   SeleniumLibrary.Wait Until Element Is Visible    ${accept_cookies_btn}    30s
-   SeleniumLibrary.Click Element   ${accept_cookies_btn}
-   SeleniumLibrary.Wait Until Element Is Visible    ${close_popup_btn}    30s
-   Sleep    2s
-   SeleniumLibrary.Click Element   ${close_popup_btn} 
 Test6
    [Tags]  ID-37
    Open Chrome
    Go to    url=${url_ixina}
-   SeleniumLibrary.Maximize Browser Window
-   SeleniumLibrary.Wait Until Element Is Visible    ${accept_cookies_btn}    30s
-   SeleniumLibrary.Click Element   ${accept_cookies_btn}
-   SeleniumLibrary.Wait Until Element Is Visible    ${close_popup_btn}    30s
-   Sleep    2s
-   SeleniumLibrary.Click Element   ${close_popup_btn} 
+

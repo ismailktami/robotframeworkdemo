@@ -11,7 +11,9 @@ from Logger import logger
 
 try:
         CommandParserArgs.ParseCommandLineParameters()
-        path = os.path.join(CommandParserArgs.OUTPUTDIR, 'output.xml')
+        path = os.path.join(CommandParserArgs.OUTPUTDIR,'output.xml')
+        print(path)
+        print(CommandParserArgs.OUTPUTDIR)
         results = ExecutionResult(path)
         suitesresults = SuiteResults(CommandParserArgs.OUTPUTDIR)
         results = results.visit(suitesresults)
@@ -50,7 +52,7 @@ try:
                                 filename='ID-'+result["testCase"]["id"]+'_TEST_FAILED.png'
                                 azure_api.add_attachement_to_testresult(run['id'],result['id'],filename)
 
-                azure_api.publish_report_to_run(run['id'],'./output_dir')
+                azure_api.publish_report_to_run(run['id'],CommandParserArgs.OUTPUTDIR)
 
 except Exception as ex:
         logger.error("Publication de resultats AZURE KO : Exception :\n"+str(ex))

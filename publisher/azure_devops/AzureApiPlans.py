@@ -42,6 +42,7 @@ class AzureApiPlans:
             
 
     def create_run(self,planId,suite_name,starttime,endtime,run_by):
+        print("create_run")
         logger.info('\n'+str(self.__class__)+'create_run')
         url = self.azure_url_project+"/test/runs?api-version="+self.version
         payload = json.dumps({

@@ -84,6 +84,8 @@ jobs:
         name: reports
 
     - name: Prepare Python 3.8
-      run:  python  publisher/azure_devops/__init__.py  "-e ${{ inputs.Environnement }}"  "-i ${GITHUB_RUN_ID}"  "-l ${GITHUB_HTML_URL}"  "-n Sprint1"
-
-    
+      run:  |
+        mkdir  reports
+        mv output.xml reports
+        ls reports
+        python  publisher/azure_devops/__init__.py  "-e ${{ inputs.Environnement }}"  "-i ${GITHUB_RUN_ID}"  "-l ${GITHUB_HTML_URL}"  "-n Sprint1"
