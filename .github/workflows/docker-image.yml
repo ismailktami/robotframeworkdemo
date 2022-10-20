@@ -66,6 +66,7 @@ jobs:
 
   PublishResultsAzure:  
     runs-on: ubuntu-latest
+    if: ${{ always() }}
     needs: [Build]
     steps:
     - uses: actions/checkout@v3
