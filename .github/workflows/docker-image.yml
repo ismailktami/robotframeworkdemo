@@ -49,23 +49,27 @@ jobs:
       run:  robot -d reports -x results.xml tests.robot
     
     - name: Archive results
+      if: always()
       uses: actions/upload-artifact@v3
       with:
         name: reports
         path: reports
 
     - name: Download reports
+      if: always()
       uses: actions/download-artifact@v3
       with:
         name: reports
         
     - name: Send report to commit
+      if: always()
       uses: joonvena/robotframework-reporter-action@v2.1
       with:
         gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 
   PublishResultsAzure:  
     runs-on: ubuntu-latest
+    if: always()
     needs: [Build]
     steps:
     - uses: actions/checkout@v3
