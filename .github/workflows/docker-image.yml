@@ -20,7 +20,6 @@ on:
         default: true
         required: true
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -51,11 +50,15 @@ jobs:
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
-        name: results
+        name: reports
         path: ${{ github.workspace }}/reports
         
+    - name: Download reports
+      uses: actions/download-artifact@v3
+      with:
+        name: reports
+
     - name: Expose reports
       uses: joonvena/robotframework-reporter-action@v2
       with:
         gh_access_token: ${{ secrets.GITHUB_TOKEN }}
-        report_path: ${{ github.workspace }}/reports
