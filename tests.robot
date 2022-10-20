@@ -77,3 +77,9 @@ Test6
    Open Chrome
    Go to    url=${url_ixina}
 
+
+Test7
+   [Tags]  ID-38
+   Open Chrome
+   Go to    url=${url_ixina}
+   Fail  hhdhhd
