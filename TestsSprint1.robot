@@ -3,7 +3,7 @@ Library     SeleniumLibrary
 Library     BuiltIn
 Library     String
 Force Tags    TESTPLAN-30    SUITE-32  SPRINT1
-
+Test Teardown  Run Keyword If Test Failed    Capture Page Screenshot    ${Test Tags}[0]_TEST_FAILED.png 
 *** Variables ***
 ${url_ixina}      https://www.ixina.fr/
 ${accept_cookies_btn}   //*[@id='onetrust-accept-btn-handler']
@@ -57,7 +57,7 @@ Test2
    [Tags]  ID-33
    Open Chrome
    Go to    url=${url_ixina}
-
+   Fail     force error
 Test3
    [Tags]  ID-34
    Open Chrome
