@@ -2,7 +2,7 @@
 Library     SeleniumLibrary
 Library     BuiltIn
 Library     String
-Force Tags    TESTPLAN-30    SUITE-32  SPRINT1
+Force Tags    TESTPLAN-30    SUITE-42  SPRINT2
 
 *** Variables ***
 ${url_ixina}      https://www.ixina.fr/
@@ -47,39 +47,17 @@ Open Chrome
 
 *** Test Cases ***
 Test1
-   [Tags]  ID-29
+   [Tags]  ID-41
    Open Chrome
    Go to    url=${url_ixina}
-   SeleniumLibrary.Maximize Browser Window
-   SeleniumLibrary.Wait Until Element Is Visible    ${accept_cookies_btn}    30s
 
 Test2
-   [Tags]  ID-33
+   [Tags]  ID-43
    Open Chrome
    Go to    url=${url_ixina}
 
 Test3
-   [Tags]  ID-34
+   [Tags]  ID-44
    Open Chrome
    Go to    url=${url_ixina}
 
-Test4
-   [Tags]  ID-35
-   Open Chrome
-   Go to    url=${url_ixina}
-
-Test5
-   [Tags]  ID-36
-   Open Chrome
-   Go to    url=${url_ixina}
-Test6
-   [Tags]  ID-37
-   Open Chrome
-   Go to    url=${url_ixina}
-
-
-Test7
-   [Tags]  ID-38
-   Open Chrome
-   Go to    url=${url_ixina}
-   Fail  hhdhhd

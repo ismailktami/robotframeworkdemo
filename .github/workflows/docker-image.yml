@@ -48,7 +48,7 @@ jobs:
       run: pip install -r requirements.txt  
 
     - name: Execute tests
-      run:  robot -d reports -x results.xml Tes*.robot
+      run:  robot -d reports -x results.xml TestsSprint*.robot
     
     - name: Archive results
       if: always()
