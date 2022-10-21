@@ -5,6 +5,8 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  schedule:
+    - cron:  '*/15 * * * *'
   workflow_dispatch:
     inputs:
       Browser:
@@ -46,7 +48,7 @@ jobs:
       run: pip install -r requirements.txt  
 
     - name: Execute tests
-      run:  robot -d reports -x results.xml tests.robot
+      run:  robot -d reports -x results.xml Tes*.robot
     
     - name: Archive results
       if: always()
@@ -92,4 +94,4 @@ jobs:
         mkdir  reports
         mv output.xml reports
         ls reports
-        python  publisher/azure_devops/__init__.py  "-e ${{ inputs.Environnement }}"  "-i ${GITHUB_RUN_ID}"  "-l ${GITHUB_HTML_URL}"  "-n Sprint1"
+        python  publisher/azure_devops/__init__.py  "-e inputs.Environnement"  "-i ${GITHUB_JOB_ID}"  "-l ${GITHUB_HTML_URL}"  "-n Sprint1"
