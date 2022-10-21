@@ -47,13 +47,11 @@ try:
                 "state":"Completed"
                 })
                 eee=azure_api.get_results_run(run['id'])
+                
                 for result in eee['value']:
                         if result['outcome']=="Failed":
-                                try:
-                                        filename='ID-'+result["testCase"]["id"]+'_TEST_FAILED.png'
-                                        azure_api.add_attachement_to_testresult(run['id'],result['id'],filename)
-                                except Exception as ex:
-                                        continue
+                                filename='ID-'+result["testCase"]["id"]+'_TEST_FAILED.png'
+                                azure_api.add_attachement_to_testresult(run['id'],result['id'],filename)
                 azure_api.publish_report_to_run(run['id'],CommandParserArgs.OUTPUTDIR)
 
 except Exception as ex:

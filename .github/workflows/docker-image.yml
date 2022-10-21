@@ -13,7 +13,7 @@ on:
         description: 'Browser'
         default: 'Chrome'
         required: true
-      Environnement:
+      environnement:
         description: 'Environnement'
         default: 'Preprod'
         required: true
@@ -106,4 +106,4 @@ jobs:
         mv output.xml reports
         mv *.png  reports
         ls reports
-        python  publisher/azure_devops/__init__.py  "-e ${{ github.event.inputs.Environnement }}"  "-i ${GITHUB_JOB_ID}"  "-l ${GITHUB_HTML_URL}"
+        python  publisher/azure_devops/__init__.py  "-e ${{ github.event.inputs.environnement }}"  "-i ${GITHUB_JOB_ID}"  "-l ${GITHUB_HTML_URL}"

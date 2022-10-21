@@ -95,7 +95,7 @@ class AzureApiPlans:
         return response.json()
 
     def add_attachement_to_testresult(self,run_id,test_result_id,filename):
-        with open("output_dir/"+filename, "rb") as report:
+        with open("reports/"+filename, "rb") as report:
             data = base64.b64encode(report.read())
         payload = json.dumps({
         "stream": str(data,'utf-8'),
