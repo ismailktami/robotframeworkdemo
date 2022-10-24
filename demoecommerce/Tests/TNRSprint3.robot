@@ -2,9 +2,11 @@
 Documentation  Validation of the shopping functionality
 Resource  ../Resources/Functional_Keywords.robot
 Resource  ../Resources/Login.robot
+Force Tags    TESTPLAN-30    SUITE-50  SPRINT3
 
 *** Test Cases ***
 Add a product to the cart and confirm the order
+    [Tags]      ID-49
     Go to the "Automation Practice" website
     Go to the "Login" page
     Input user and password

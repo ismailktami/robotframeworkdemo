@@ -40,7 +40,7 @@ on:
         required: false
 
 jobs:
-  Build:
+  ExecutionTests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -56,7 +56,7 @@ jobs:
         sudo apt-get -y update
         sudo apt-get install -y google-chrome-stable
         sudo apt-get install -yqq unzip
-        wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
+        wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_106`/chromedriver_linux64.zip
         unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
         chmod 777 /usr/local/bin/chromedriver
         pip install --upgrade pip
@@ -64,14 +64,21 @@ jobs:
     - name: Install requierement 
       run: pip install -r requirements.txt  
 
+    - name: Prepare tags
+      run: |
+       tagsi=${{ github.event.inputs.includeTags }} ;IFS=',' read -r -a array <<< "$tagsi" ;a='' ;for i in "${array[@]}"; do OUTI=$OUTI" -i $i"; done ;
+       echo "TAGSE=$OUTI" >> $GITHUB_ENV
+       tagse=${{ github.event.inputs.excludeTags }} ;IFS=',' read -r -a array <<< "$tagse" ;a='' ;for i in "${array[@]}"; do OUTE=$OUTE" -e $i"; done ;
+       echo "TAGSI=$OUTE" >> $GITHUB_ENV
+    
     - name: Execute tests demoecommerce
-      if: ${{ github.event.inputs.testssuite == '' }}
-      run:  robot -d reports -x results.xml demoecommerce/Tests/*.robot
-
+      if: ${{ github.event.inputs.testssuite == '' || github.event.inputs.testssuite == 'demoecommerce' }}
+      run:  robot -d reports -x results.xml ${{ env.TAGSI }} ${{ env.TAGSE }} demoecommerce/Tests/*.robot   
+      
     - name: Execute tests democuisine
       if: ${{ github.event.inputs.testssuite == 'democuisine' }}
       run:  robot -d reports -x results.xml TestsSprint*.robot
-    
+
     - name: Archive results
       if: always()
       uses: actions/upload-artifact@v3
@@ -94,7 +101,7 @@ jobs:
   PublishResultsAzure:  
     runs-on: ubuntu-latest
     if: always()
-    needs: [Build]
+    needs: [ExecutionTests]
     steps:
     - uses: actions/checkout@v3
 
