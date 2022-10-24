@@ -9,7 +9,11 @@ on:
     - cron:  '*/15 * * * *'
   workflow_dispatch:
     inputs:
-      Browser:
+      testsSuite:
+        description: 'Tests Suites'
+        default: 'demoecommerce'
+        required: true
+      browser:
         description: 'Browser'
         default: 'Chrome'
         required: true
@@ -17,17 +21,17 @@ on:
         description: 'Environnement'
         default: 'Preprod'
         required: true
-      PublishReport:
+      publishReport:
         description: 'PublishReport'
         default: true
         required: true
       
-      IncludeTags:
+      includeTags:
         description: 'Include tags'
         default: ''
         required: false
       
-      ExcludeTags:
+      excludeTags:
         description: 'Exclude tags'
         default: ''
         required: false
@@ -58,8 +62,13 @@ jobs:
     - name: Install requierement 
       run: pip install -r requirements.txt  
 
-    - name: Execute tests
+    - name: Execute tests democuisine
+      if: ${{github.event.inputs.testsSuite == 'democuisine' }}
       run:  robot -d reports -x results.xml TestsSprint*.robot
+   
+    - name: Execute tests demoecommerce
+      if: ${{github.event.inputs.testsSuite == 'demoecommerce' }}
+      run:  robot -d reports -x results.xml demoecommerce/Tests/*.robot
     
     - name: Archive results
       if: always()
