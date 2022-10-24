@@ -5,26 +5,29 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-  schedule:
-    - cron:  '*/15 * * * *'
+#   schedule:
+#     - cron:  '*/15 * * * *'
   workflow_dispatch:
     inputs:
-      testsSuite:
+      testssuite:
         description: 'Tests Suites'
         default: 'demoecommerce'
-        required: true
+        required: false
+        type: string
       browser:
         description: 'Browser'
         default: 'Chrome'
-        required: true
+        required: false
+
       environnement:
         description: 'Environnement'
         default: 'Preprod'
-        required: true
+        required: false
+     
       publishReport:
         description: 'PublishReport'
         default: true
-        required: true
+        required: false
       
       includeTags:
         description: 'Include tags'
@@ -41,7 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
     - name: Prepare Python 3.8
       uses: actions/setup-python@v4
       with:
@@ -62,13 +64,13 @@ jobs:
     - name: Install requierement 
       run: pip install -r requirements.txt  
 
-    - name: Execute tests democuisine
-      if: ${{github.event.inputs.testsSuite == 'democuisine' }}
-      run:  robot -d reports -x results.xml TestsSprint*.robot
-   
     - name: Execute tests demoecommerce
-      if: ${{github.event.inputs.testsSuite == 'demoecommerce' }}
+      if: ${{ github.event.inputs.testssuite == '' }}
       run:  robot -d reports -x results.xml demoecommerce/Tests/*.robot
+
+    - name: Execute tests democuisine
+      if: ${{ github.event.inputs.testssuite == 'democuisine' }}
+      run:  robot -d reports -x results.xml TestsSprint*.robot
     
     - name: Archive results
       if: always()
@@ -108,11 +110,9 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: reports
+        path: reports
 
     - name: Prepare Python 3.8
       run:  |
-        mkdir  reports
-        mv output.xml reports
-        mv *.png  reports
         ls reports
         python  publisher/azure_devops/__init__.py  "-e ${{ github.event.inputs.environnement }}"  "-i ${GITHUB_JOB_ID}"  "-l ${GITHUB_HTML_URL}"

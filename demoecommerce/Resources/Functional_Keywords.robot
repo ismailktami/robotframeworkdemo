@@ -7,10 +7,35 @@ ${WEBSITE}  http://automationpractice.com/index.php
 
 *** Keywords ***
 #Sections_and_products_validation - Keywords
-
+Open Chrome
+    # DISABLE DEFAULT CAPTURE IF FAILED, SET CAPTURE WITH GOOD FILENAME IN TEARDOWN
+    SeleniumLibrary.Register Keyword To Run On Failure    NONE
+    # SET CHROME BINARY
+    # SET CHROME OPTIONS
+    ${options}=    BuiltIn.Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Call Method    ${options}    add_argument    --test-type
+    Call Method    ${options}    add_argument    --ignore-certificate-errors
+    Call Method    ${options}    add_argument    --disable-extensions
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    --disable-gpu
+    Call Method    ${options}    add_argument    --no-sandbox
+    # AUTOMATICALY DEFAULT DOWNLOAD DIRECTORY
+	${prefs}    Create Dictionary    download.default_directory=${OUTPUT DIR}    profile.default_content_settings.popups=${0}    profile.default_content_setting_values.notifications=${2}
+	Call Method    ${options}    add_experimental_option    prefs    ${prefs}  
+	# DISABLE POPUP CHROME CONTROLED BY AUTOMATION TOOLS
+	Call Method    ${options}    add_experimental_option    useAutomationExtension    ${False}
+    ${excluded}    Create List    enable-automation   enable-logging
+    Call Method    ${options}    add_experimental_option    excludeSwitches    ${excluded}
+    # SET CHROME PORTABLE BINARY
+    # START DRIVER
+    SeleniumLibrary.Create Webdriver    Chrome    chrome_options=${options} 
+    SeleniumLibrary.Set Selenium Timeout    60s
+    SeleniumLibrary.Set Selenium Implicit Wait    30s  
+    SeleniumLibrary.Maximize Browser Window   
+    
 Go to the "Automation Practice" website
-    Open Browser  about:blank  ${BROWSER}
-    Maximize Browser Window
+    Open Chrome
     Go To  ${WEBSITE}
     Sleep  2s
     
