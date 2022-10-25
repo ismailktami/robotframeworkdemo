@@ -9,11 +9,6 @@ on:
 #     - cron:  '*/15 * * * *'
   workflow_dispatch:
     inputs:
-      testssuite:
-        description: 'Tests Suites'
-        default: 'demoecommerce'
-        required: false
-        type: string
       browser:
         description: 'Browser'
         default: 'Chrome'
@@ -71,14 +66,9 @@ jobs:
        tagse=${{ github.event.inputs.excludeTags }} ;IFS=',' read -r -a array <<< "$tagse" ;a='' ;for i in "${array[@]}"; do OUTE=$OUTE" -e $i"; done ;
        echo "TAGSI=$OUTE" >> $GITHUB_ENV
     
-    - name: Execute tests demoecommerce
-      if: ${{ github.event.inputs.testssuite == '' || github.event.inputs.testssuite == 'demoecommerce' }}
+    - name: Execute tests
       run:  robot -d reports -x results.xml ${{ env.TAGSI }} ${{ env.TAGSE }} demoecommerce/Tests/*.robot   
       
-    - name: Execute tests democuisine
-      if: ${{ github.event.inputs.testssuite == 'democuisine' }}
-      run:  robot -d reports -x results.xml TestsSprint*.robot
-
     - name: Archive results
       if: always()
       uses: actions/upload-artifact@v3
