@@ -3,6 +3,7 @@ Documentation  Validation of the shopping functionality
 Resource  ../Resources/Functional_Keywords.robot
 Resource  ../Resources/Login.robot
 Force Tags    TESTPLAN-30    SUITE-50  SPRINT3
+Test Teardown  Run Keyword If Test Failed    Capture Page Screenshot    ${Test Tags}[0]_TEST_FAILED.png 
 
 *** Test Cases ***
 Add a product to the cart and confirm the order
