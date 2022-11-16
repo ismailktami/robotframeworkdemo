@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Tests CI
 
 on:
   push:
@@ -18,11 +18,20 @@ on:
         description: 'Environnement'
         default: 'Preprod'
         required: false
+        type: choice
+        options:  
+          - Preprod
+          - Dev
+          - Rec
      
       publishReport:
         description: 'PublishReport'
         default: true
         required: false
+        type: choice
+        options:
+          - true
+          - false
       
       includeTags:
         description: 'Include tags'
