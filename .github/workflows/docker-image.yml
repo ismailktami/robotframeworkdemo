@@ -14,34 +14,34 @@ on:
         default: 'Chrome'
         required: false
 
-      environnement:
-        description: 'Environnement'
-        default: 'Preprod'
-        required: false
-        type: choice
-        options:  
-          - Preprod
-          - Dev
-          - Rec
+#       environnement:
+#         description: 'Environnement'
+#         default: 'Preprod'
+#         required: false
+#         type: choice
+#         options:  
+#           - Preprod
+#           - Dev
+#           - Rec
      
-      publishReport:
-        description: 'PublishReport'
-        default: true
-        required: false
-        type: choice
-        options:
-          - true
-          - false
+#       publishReport:
+#         description: 'PublishReport'
+#         default: true
+#         required: false
+#         type: choice
+#         options:
+#           - true
+#           - false
       
-      includeTags:
-        description: 'Include tags'
-        default: ''
-        required: false
+#       includeTags:
+#         description: 'Include tags'
+#         default: ''
+#         required: false
       
-      excludeTags:
-        description: 'Exclude tags'
-        default: ''
-        required: false
+#       excludeTags:
+#         description: 'Exclude tags'
+#         default: ''
+#         required: false
 
 jobs:
   ExecutionTests:
